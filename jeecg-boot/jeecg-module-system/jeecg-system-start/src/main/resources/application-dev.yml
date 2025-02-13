@@ -8,7 +8,7 @@ esclient:
   master-port: 9200
   master-auth: true
   master-user-name: admin
-  master-user-pwd: ${OPENSEARCH_INITIAL_ADMIN_PASSWORD:secret}
+  master-user-pwd: ${OPENSEARCH_INITIAL_ADMIN_PASSWORD:Coconet1.}
 server:
   port: 8080
   undertow:
@@ -40,13 +40,20 @@ spring:
   ai:
     vectorstore:
       redis:
-        index-name: beers
-        prefix: "beers:"
+        prefix: "custom-prefix:"
+        index: "custom-index"
         initialize-schema: true
     ollama:
-      base-url: http://jeecg-boot-ollama-1:11434
+      base-url: http://192.168.10.235:11434
+      init:
+        pull-model-strategy: always
+        embedding:
+          additional-models:
+            - mofanke/dmeta-embedding-zh
       chat:
-        model: qwen2
+#        model: qwen2
+#        model:  deepseek-r1:1.5b
+        model:  deepseek-r1:7b
       embedding:
         model: mofanke/dmeta-embedding-zh
   # flyway配置
